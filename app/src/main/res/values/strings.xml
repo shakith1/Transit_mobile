@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Transit</string>
+    <string name="Title">Transit</string>
+    <string name="description">Simplified Ticketing System</string>
+</resources>
