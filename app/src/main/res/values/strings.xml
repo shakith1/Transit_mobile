@@ -2,4 +2,25 @@
     <string name="app_name">Transit</string>
     <string name="Title">Transit</string>
     <string name="description">Simplified Ticketing System</string>
+
+
+    <!-- Strings for OnBoarding Screen -->
+
+    <!-- Titles -->
+    <string name="first_title">Create Account</string>
+    <string name="second_title">Top Up the Account</string>
+    <string name="third_title">Scan the QR code</string>
+
+
+    <!-- Description -->
+    <string name="first_desc">Register to the app by simply providing the personal inforamation and able to use the transit service.</string>
+    <string name="second_desc">Easy recharging the account with a credit card.</string>
+    <string name="third_desc">Just scan the QR code and travel where ever you need.</string>
+    <string name="skip_btn">Skip</string>>
+    <string name="next_btn">Next</string>
+    <string name="get_started_btn">Lets Get Started</string>
+
+    <!-- Buttons -->
+
+
 </resources>

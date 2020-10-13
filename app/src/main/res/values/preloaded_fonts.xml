@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alfa_slab_one</item>
         <item>@font/antic</item>
         <item>@font/bangers</item>
+        <item>@font/baumans</item>
+        <item>@font/chango</item>
         <item>@font/comfortaa</item>
         <item>@font/comfortaa_light</item>
+        <item>@font/donegal_one</item>
         <item>@font/gravitas_one</item>
+        <item>@font/luckiest_guy</item>
         <item>@font/russo_one</item>
     </array>
 </resources>
