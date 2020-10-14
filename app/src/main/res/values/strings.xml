@@ -16,11 +16,17 @@
     <string name="first_desc">Register to the app by simply providing the personal inforamation and able to use the transit service.</string>
     <string name="second_desc">Easy recharging the account with a credit card.</string>
     <string name="third_desc">Just scan the QR code and travel where ever you need.</string>
+
+
+    <!-- Buttons -->
     <string name="skip_btn">Skip</string>>
     <string name="next_btn">Next</string>
     <string name="get_started_btn">Lets Get Started</string>
+    <string name="login">Login</string>
 
-    <!-- Buttons -->
+
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_pwd">Enter Password</string>
 
 
 </resources>
