@@ -30,6 +30,17 @@
     <string name="remember_me">Remember Me</string>
     <string name="forget_pwd">Forget Password</string>
     <string name="create_account">Create Account</string>
+    <string name="full_name">Full name</string>
+    <string name="user_name">Username</string>
+    <string name="email">Email</string>
+    <string name="mobile">Mobile</string>
+    <string name="pwd">Password</string>
+    <string name="choose_gender">Choose Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="select_age">Select Your Age</string>
+    <string name="choose_country">Choose Country</string>
+    <string name="signup">Sign Up</string>
 
 
 </resources>

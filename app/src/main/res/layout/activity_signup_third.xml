@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupThird"
+    android:background="@color/colorMainBackground"
+    android:padding="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/signup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            android:textColor="@color/colorBlack"
+            android:textSize="40sp"
+            android:fontFamily="@font/muli_black"
+            android:textAllCaps="true"
+            android:layout_marginTop="40dp"
+            android:transitionName="transition_title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_country"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"/>
+
+            <com.hbb20.CountryCodePicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="true"
+                app:ccp_showFullName="true"
+                app:ccp_showPhoneCode="false"
+                android:padding="5dp"
+                app:ccp_defaultNameCode="LK"
+                android:background="@drawable/black_border"
+                android:layout_marginTop="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/icons8_phone_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconTint="@color/colorBlack"
+                app:hintTextColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorBlack"
+                app:boxStrokeWidthFocused="2dp"
+                android:layout_marginTop="10dp"
+                app:boxStrokeColor="@color/colorBlack">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mobile"
+                    android:inputType="number"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signup_next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signup"
+            android:background="@color/colorBlack"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorWhite"
+            android:elevation="5dp"
+            android:transitionName="transition_next"/>
+
+        <Button
+            android:id="@+id/signup_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:background="#00000000"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/muli"
+            android:elevation="5dp"
+            android:transitionName="transition_login"/>
+
+    </LinearLayout>
+</ScrollView>
