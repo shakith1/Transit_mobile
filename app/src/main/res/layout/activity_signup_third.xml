@@ -82,7 +82,7 @@
             android:id="@+id/signup_next_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signup"
+            android:text="@string/next_btn"
             android:background="@color/colorBlack"
             android:layout_marginTop="20dp"
             android:textColor="@color/colorWhite"

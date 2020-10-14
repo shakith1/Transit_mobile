@@ -41,6 +41,10 @@
     <string name="select_age">Select Your Age</string>
     <string name="choose_country">Choose Country</string>
     <string name="signup">Sign Up</string>
+    <string name="code">Co\nde</string>
+    <string name="verification">Verification</string>
+    <string name="verification_desc">Enter the code sent on mobile</string>
+    <string name="verify_code">Verify Code</string>
 
 
 </resources>
