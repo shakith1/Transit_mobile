@@ -12,13 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/icon"
+            android:transitionName="logo"
+            android:layout_marginLeft="-28dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
             android:fontFamily="@font/muli_black"
             android:text="@string/login"
+            android:layout_marginTop="20dp"
+            android:transitionName="logo_text"
             android:textAllCaps="true"
             android:textColor="@color/colorBlack"
             android:textSize="30sp" />
@@ -27,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="60dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -73,16 +81,47 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
                 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"/>
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:text="@string/remember_me"
+                    android:layout_centerVertical="true"
+                    android:buttonTint="@color/colorBlack"
+                    android:textColor="@color/colorBlack"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forget_pwd"
+                    android:background="#00000000"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
                 
-            </LinearLayout>
+            </RelativeLayout>
+            
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:background="@color/colorBlack"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="20dp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_account"
+                android:background="#00000000"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"/>
+
             
         </LinearLayout>
     </LinearLayout>

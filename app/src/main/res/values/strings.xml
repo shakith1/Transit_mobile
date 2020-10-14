@@ -13,8 +13,8 @@
 
 
     <!-- Description -->
-    <string name="first_desc">Register to the app by simply providing the personal inforamation and able to use the transit service.</string>
-    <string name="second_desc">Easy recharging the account with a credit card.</string>
+    <string name="first_desc">Register to the app by simply providing the personal inforamation and use the transit service.</string>
+    <string name="second_desc">Recharge the account easily with a credit card.</string>
     <string name="third_desc">Just scan the QR code and travel where ever you need.</string>
 
 
@@ -27,6 +27,9 @@
 
     <string name="enter_username">Enter Username</string>
     <string name="enter_pwd">Enter Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_pwd">Forget Password</string>
+    <string name="create_account">Create Account</string>
 
 
 </resources>

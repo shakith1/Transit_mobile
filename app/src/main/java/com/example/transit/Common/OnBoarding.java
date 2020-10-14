@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.transit.Dashboard;
 import com.example.transit.HelperClasses.SliderAdapter;
+import com.example.transit.Login;
 import com.example.transit.R;
 
 public class OnBoarding extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class OnBoarding extends AppCompatActivity {
     }
 
     public void skip(View view) {
-        startActivity(new Intent(getApplicationContext(), Dashboard.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 
@@ -65,7 +66,7 @@ public class OnBoarding extends AppCompatActivity {
     }
 
     public void started(View view){
-        startActivity(new Intent(getApplicationContext(), Dashboard.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 

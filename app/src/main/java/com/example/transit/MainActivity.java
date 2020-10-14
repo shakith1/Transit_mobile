@@ -3,11 +3,14 @@ package com.example.transit;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Pair;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -44,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
         tag.setAnimation(bottomAnimation);
 
         new Handler().postDelayed(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void run() {
 
                 onBoardingScreen = getSharedPreferences("onBoardingScreen",MODE_PRIVATE);
                 boolean isFirstTime = onBoardingScreen.getBoolean("firstTime",true);
 
-               // if(isFirstTime){
+//                if(isFirstTime){
 
                     SharedPreferences.Editor editor = onBoardingScreen.edit();
                     editor.putBoolean("firstTime",false);
@@ -61,8 +65,14 @@ public class MainActivity extends AppCompatActivity {
                     finish();
 
 //                } else {
-//                    Intent intent = new Intent(MainActivity.this, Dashboard .class);
-//                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, Login.class);
+//
+//                    Pair[] pairs = new Pair[2];
+//                    pairs[0] = new Pair<View,String>(image,"logo");
+//                    pairs[1] = new Pair<View,String>(logo,"logo_text");
+//
+//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
+//                    startActivity(intent,options.toBundle());
 //                    finish();
 //                }
             }

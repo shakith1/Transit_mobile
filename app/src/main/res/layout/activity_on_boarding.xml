@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="started"
-            android:background="@color/colorMainBackground"
+            android:background="@color/colorLetsBtn"
             android:text="@string/get_started_btn"
             android:visibility="invisible" />
 

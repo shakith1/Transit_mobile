@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:src="@drawable/logo_new"
+        android:transitionName="logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,7 @@
         android:fontFamily="@font/gravitas_one"
         android:text="@string/Title"
         android:textSize="50sp"
+        android:transitionName="logo_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
