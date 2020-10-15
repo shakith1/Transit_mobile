@@ -11,10 +11,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+import com.hbb20.CountryCodePicker;
+
 public class SignupThird extends AppCompatActivity {
 
     TextView title;
     Button next,login;
+    CountryCodePicker countryCodePicker;
+    TextInputLayout phoneNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,9 @@ public class SignupThird extends AppCompatActivity {
         next = findViewById(R.id.signup_next_btn);
         title = findViewById(R.id.signup_title);
         login = findViewById(R.id.signup_login_btn);
+
+        countryCodePicker = findViewById(R.id.country_code_picker);
+        phoneNo = findViewById(R.id.phone_no);
     }
 
     public void callOTP(View view) {
@@ -36,8 +44,21 @@ public class SignupThird extends AppCompatActivity {
         String gender = getIntent().getStringExtra("gender");
         String date = getIntent().getStringExtra("date");
 
+        String userEnteredPhoneNo = phoneNo.getEditText().getText().toString().trim();
+        String _phoneNo = "+" + countryCodePicker.getFullNumber() + userEnteredPhoneNo;
+
         Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
 
+        // Pass fields for the next activity
+        intent.putExtra("fullName", fullName);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
+        intent.putExtra("pwd", pwd);
+        intent.putExtra("gender", gender);
+        intent.putExtra("date", date);
+        intent.putExtra("phoneNo", _phoneNo);
+
+        // Add Transition
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(next, "transition_next");
 

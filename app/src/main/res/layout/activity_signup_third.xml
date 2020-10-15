@@ -72,6 +72,7 @@
                 android:textSize="18sp"/>
 
             <com.hbb20.CountryCodePicker
+                android:id="@+id/country_code_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ccp_autoDetectCountry="true"
@@ -85,6 +86,7 @@
                 android:layout_marginTop="10dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/icons8_phone_24"
@@ -96,6 +98,8 @@
                 app:endIconTint="@color/colorBlack"
                 app:boxStrokeWidthFocused="2dp"
                 android:layout_marginTop="10dp"
+                app:helperTextEnabled="true"
+                app:helperText="(ex:- 710000000)"
                 app:boxStrokeColor="@color/colorBlack">
 
                 <com.google.android.material.textfield.TextInputEditText
