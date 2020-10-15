@@ -46,6 +46,12 @@ public class SignupThird extends AppCompatActivity {
         String date = getIntent().getStringExtra("date");
 
         String userEnteredPhoneNo = phoneNo.getEditText().getText().toString().trim();
+
+        // Remove the "0" if user enters 0 at the begining.
+        if (userEnteredPhoneNo.charAt(0) == '0') {
+            userEnteredPhoneNo = userEnteredPhoneNo.substring(1);
+        }
+
         String _phoneNo = "+" + countryCodePicker.getFullNumber() + userEnteredPhoneNo;
 
         Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
