@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
     TextView title,title_text;
     Button next, login;
 
-    TextInputLayout fullName, username, email, pwd;
+    TextInputLayout fullName, username,passport, email, pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class SignUp extends AppCompatActivity {
 
         fullName = findViewById(R.id.signup_fullname);
         username = findViewById(R.id.signup_username);
+        passport = findViewById(R.id.signup_id_passport);
         email = findViewById(R.id.signup_email);
         pwd = findViewById(R.id.signup_pwd);
 
@@ -53,6 +54,7 @@ public class SignUp extends AppCompatActivity {
 
         intent.putExtra("fullName",fullName.getEditText().getText().toString());
         intent.putExtra("userName",username.getEditText().getText().toString());
+        intent.putExtra("passport",passport.getEditText().getText().toString());
         intent.putExtra("email",email.getEditText().getText().toString());
         intent.putExtra("pwd",pwd.getEditText().getText().toString());
 

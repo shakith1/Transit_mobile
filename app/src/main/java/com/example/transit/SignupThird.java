@@ -17,7 +17,7 @@ import com.hbb20.CountryCodePicker;
 public class SignupThird extends AppCompatActivity {
 
     TextView title;
-    Button next,login;
+    Button next, login;
     CountryCodePicker countryCodePicker;
     TextInputLayout phoneNo;
 
@@ -39,6 +39,7 @@ public class SignupThird extends AppCompatActivity {
 
         String fullName = getIntent().getStringExtra("fullName");
         String username = getIntent().getStringExtra("username");
+        String passport = getIntent().getStringExtra("passport");
         String email = getIntent().getStringExtra("email");
         String pwd = getIntent().getStringExtra("pwd");
         String gender = getIntent().getStringExtra("gender");
@@ -52,6 +53,7 @@ public class SignupThird extends AppCompatActivity {
         // Pass fields for the next activity
         intent.putExtra("fullName", fullName);
         intent.putExtra("username", username);
+        intent.putExtra("passport", passport);
         intent.putExtra("email", email);
         intent.putExtra("pwd", pwd);
         intent.putExtra("gender", gender);
@@ -70,7 +72,7 @@ public class SignupThird extends AppCompatActivity {
         }
     }
 
-    public void back(View view){
+    public void back(View view) {
         Intent intent = new Intent(getApplicationContext(), SignUpSecond.class);
 
         Pair[] pairs = new Pair[3];

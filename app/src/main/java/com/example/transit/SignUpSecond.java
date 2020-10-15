@@ -62,6 +62,7 @@ public class SignUpSecond extends AppCompatActivity {
 
         String fullName = getIntent().getStringExtra("fullName");
         String username = getIntent().getStringExtra("userName");
+        String passport = getIntent().getStringExtra("passport");
         String email = getIntent().getStringExtra("email");
         String pwd = getIntent().getStringExtra("pwd");
 
@@ -69,6 +70,7 @@ public class SignUpSecond extends AppCompatActivity {
 
         intent.putExtra("fullName", fullName);
         intent.putExtra("username", username);
+        intent.putExtra("passport", passport);
         intent.putExtra("email", email);
         intent.putExtra("pwd", pwd);
         intent.putExtra("gender", selectedGender);

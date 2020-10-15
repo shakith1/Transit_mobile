@@ -58,6 +58,7 @@
     <string name="ok">OK</string>
     <string name="pwd_updated">Password Updated</string>
     <string name="pwd_update_success">Your Password has been update!</string>
+    <string name="id_passport">ID / Passport No</string>
 
 
 </resources>
