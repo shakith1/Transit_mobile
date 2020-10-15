@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class SignUp extends AppCompatActivity {
     ImageView back,image;
     TextView title,title_text;
     Button next, login;
+
+    RelativeLayout progressBar;
 
     TextInputLayout fullName, username,passport, email, pwd;
 
@@ -49,6 +52,7 @@ public class SignUp extends AppCompatActivity {
         email = findViewById(R.id.signup_email);
         pwd = findViewById(R.id.signup_pwd);
 
+        progressBar = findViewById(R.id.signup_progress_bar);
     }
 
     public void callNextSignupScreen(View view) {
@@ -59,13 +63,16 @@ public class SignUp extends AppCompatActivity {
 
         String _username = username.getEditText().getText().toString().trim();
 
+        progressBar.setVisibility(View.VISIBLE);
         Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").equalTo(_username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     Intent intent = new Intent(getApplicationContext(), SignUpSecond.class);
 
                     intent.putExtra("fullName",fullName.getEditText().getText().toString());

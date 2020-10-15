@@ -53,11 +53,10 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:orientation="vertical">
+            android:layout_marginTop="60dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/signup_fullname"
@@ -87,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorBlack"
+                android:layout_below="@id/signup_fullname"
                 app:boxStrokeColor="@color/colorBlack"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
@@ -109,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorBlack"
+                android:layout_below="@id/signup_username"
                 app:boxStrokeColor="@color/colorBlack"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
@@ -132,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorBlack"
                 app:boxStrokeColor="@color/colorBlack"
+                android:layout_below="@id/signup_id_passport"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/colorBlack"
@@ -155,6 +157,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorBlack"
                 app:boxStrokeColor="@color/colorBlack"
+                android:layout_below="@id/signup_email"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconTint="@color/colorBlack"
                 app:hintTextColor="@color/colorBlack"
@@ -171,7 +174,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/signup_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:visibility="invisible"
+                android:layout_centerInParent="true"
+                android:background="@drawable/white_circle"
+                android:elevation="8dp">
+
+                <ProgressBar
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/signup_next_btn"
