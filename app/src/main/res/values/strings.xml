@@ -29,7 +29,8 @@
     <string name="enter_pwd">Enter Password</string>
     <string name="remember_me">Remember Me</string>
     <string name="forget_pwd">Forget Password</string>
-    <string name="create_account">Create Account</string>
+    <string name="create_account_btn">Create Account</string>
+    <string name="create_account">Create\nAccount</string>
     <string name="full_name">Full Name</string>
     <string name="user_name">Username</string>
     <string name="email">Email</string>
@@ -49,7 +50,7 @@
     <string name="make_selection">Select the contact detail which should use to reset the password</string>
     <string name="make_selection_title">Make Selection</string>
     <string name="via_sms">via sms:</string>
-    <string name="via_sms">via mail:</string>
+    <string name="via_mail">via mail:</string>
     <string name="new_credentials">New Credentials</string>
     <string name="new_credential_details">Your Identity has been verified! Set your new password</string>
     <string name="new_pwd">New Password</string>

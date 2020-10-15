@@ -104,7 +104,7 @@
                 android:layout_marginTop="35dp"
                 android:layout_toRightOf="@id/mail_icon"
                 android:fontFamily="@font/muli"
-                android:text="@string/via_sms"
+                android:text="@string/via_mail"
                 android:textSize="25sp" />
 
             <TextView
