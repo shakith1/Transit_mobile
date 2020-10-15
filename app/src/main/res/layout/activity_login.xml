@@ -31,10 +31,9 @@
             android:textColor="@color/colorBlack"
             android:textSize="30sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="60dp">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -66,6 +65,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/enter_pwd"
+                android:layout_below="@id/login_username"
                 app:hintTextColor="@color/colorBlack"
                 app:boxStrokeColor="@color/colorBlack"
                 app:boxStrokeWidthFocused="2dp"
@@ -84,8 +84,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
+                android:id="@+id/forget_pwd_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/login_pwd"
                 android:layout_marginTop="20dp">
                 
                 <CheckBox
@@ -108,27 +110,47 @@
             </RelativeLayout>
             
             <Button
+                android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
+                android:layout_below="@id/forget_pwd_block"
                 android:onClick="login"
                 android:background="@color/colorBlack"
                 android:textColor="@color/colorWhite"
                 android:layout_marginTop="20dp"/>
-
-
+            
             <Button
                 android:id="@+id/signup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="callSignUpScreen"
+                android:layout_below="@id/login_login_btn"
                 android:text="@string/create_account_btn"
                 android:background="#00000000"
                 android:layout_marginTop="20dp"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
                 android:transitionName="transition_signup_btn"/>
-
             
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:visibility="invisible"
+                android:layout_centerInParent="true"
+                android:background="@drawable/white_circle"
+                android:elevation="8dp">
+
+                <ProgressBar
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+            
+        </RelativeLayout>
+        
     </LinearLayout>
+    
 </ScrollView>

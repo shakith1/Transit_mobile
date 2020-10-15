@@ -10,6 +10,8 @@ import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -24,6 +26,8 @@ public class Login extends AppCompatActivity {
     Button signup;
     TextInputLayout username, pwd;
 
+    RelativeLayout progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class Login extends AppCompatActivity {
 
         username = findViewById(R.id.login_username);
         pwd = findViewById(R.id.login_pwd);
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     public void callSignUpScreen(View view) {
@@ -56,6 +61,8 @@ public class Login extends AppCompatActivity {
         if (!validateFields()) {
             return;
         }
+
+        progressBar.setVisibility(View.VISIBLE);
 
         // Get data
         final String _username = username.getEditText().getText().toString().trim();
@@ -83,18 +90,21 @@ public class Login extends AppCompatActivity {
                         String _gender = dataSnapshot.child(_username).child("gender").getValue(String.class);
                         String _phoneNo = dataSnapshot.child(_username).child("phoneNo").getValue(String.class);
 
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.this, _fullName, Toast.LENGTH_SHORT).show();
                     } else {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.this, "Password does not match!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(Login.this, "No such user exists!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(Login.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
