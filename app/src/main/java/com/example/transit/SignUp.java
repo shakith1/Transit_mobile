@@ -1,5 +1,6 @@
 package com.example.transit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -11,9 +12,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
 
@@ -50,25 +57,70 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        Intent intent = new Intent(getApplicationContext(), SignUpSecond.class);
+        String _username = username.getEditText().getText().toString().trim();
 
-        intent.putExtra("fullName",fullName.getEditText().getText().toString());
-        intent.putExtra("userName",username.getEditText().getText().toString());
-        intent.putExtra("passport",passport.getEditText().getText().toString());
-        intent.putExtra("email",email.getEditText().getText().toString());
-        intent.putExtra("pwd",pwd.getEditText().getText().toString());
+        Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").equalTo(_username);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), SignUpSecond.class);
 
-        Pair[] pairs = new Pair[3];
-        pairs[0] = new Pair<View, String>(title, "transition_title");
-        pairs[1] = new Pair<View, String>(next, "transition_next");
-        pairs[2] = new Pair<View, String>(login, "transition_login");
+                    intent.putExtra("fullName",fullName.getEditText().getText().toString());
+                    intent.putExtra("userName",username.getEditText().getText().toString());
+                    intent.putExtra("passport",passport.getEditText().getText().toString());
+                    intent.putExtra("email",email.getEditText().getText().toString());
+                    intent.putExtra("pwd",pwd.getEditText().getText().toString());
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUp.this, pairs);
-            startActivity(intent, options.toBundle());
-        } else {
-            startActivity(intent);
-        }
+                    Pair[] pairs = new Pair[3];
+                    pairs[0] = new Pair<View, String>(title, "transition_title");
+                    pairs[1] = new Pair<View, String>(next, "transition_next");
+                    pairs[2] = new Pair<View, String>(login, "transition_login");
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUp.this, pairs);
+                        startActivity(intent, options.toBundle());
+                    } else {
+                        startActivity(intent);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private Boolean[] validateUserName() {
+
+        final Boolean[] check = new Boolean[1];
+        
+        String _username = username.getEditText().getText().toString().trim();
+        
+        Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").equalTo(_username);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
+                    check[0] = false;
+                }else{
+                    check[0] = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        
+        return check;
     }
 
     // Validation Functions
