@@ -116,7 +116,7 @@ public class VerifyOTP extends AppCompatActivity {
 
         UserHelperClass addNewUser = new UserHelperClass(fullName, username, passport, email, phoneNo, pwd, date, gender);
 
-        reference.child(phoneNo).setValue(addNewUser);
+        reference.child(username).setValue(addNewUser);
     }
 
     public void callNextScreenFromOTP(View view) {
