@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.transit.Common.ForgetPassword;
+import com.example.transit.Databases.SessionManager;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -117,9 +118,14 @@ public class Login extends AppCompatActivity {
                         String _date = dataSnapshot.child(_username).child("date").getValue(String.class);
                         String _gender = dataSnapshot.child(_username).child("gender").getValue(String.class);
                         String _phoneNo = dataSnapshot.child(_username).child("phoneNo").getValue(String.class);
+                        String _password = dataSnapshot.child(_username).child("password").getValue(String.class);
+
+                        // Create Session
+                        SessionManager sessionManager = new SessionManager(Login.this);
+                        sessionManager.createLoginSession(_fullName,_username,_email,_passport,_phoneNo,_password,_date,_gender);
 
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(Login.this, _fullName, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
                     } else {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.this, "Password does not match!", Toast.LENGTH_SHORT).show();
