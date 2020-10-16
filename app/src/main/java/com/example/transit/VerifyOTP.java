@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.example.transit.Common.SetNewPassword;
+import com.example.transit.Databases.CreditHelperClass;
 import com.example.transit.Databases.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +37,7 @@ public class VerifyOTP extends AppCompatActivity {
     PinView pinFromUser;
     String codeBySystem;
 
-    String fullName, username, passport, email, pwd, date, gender, phoneNo,whatToDo;
+    String fullName, username, passport, email, pwd, date, gender, phoneNo, whatToDo, country;
 
     ScrollView scrollView;
 
@@ -59,14 +60,15 @@ public class VerifyOTP extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         gender = getIntent().getStringExtra("gender");
         phoneNo = getIntent().getStringExtra("phoneNo");
+        country = getIntent().getStringExtra("country");
         whatToDo = getIntent().getStringExtra("whatToDo");
 
-        if(whatToDo.equals("updateData")){
+        if (whatToDo.equals("updateData")) {
             scrollView.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             pinFromUser.setItemBackgroundColor((getResources().getColor(R.color.colorWhite)));
+        }else{
+            sendVerificationCode(phoneNo);
         }
-
-        sendVerificationCode(phoneNo);
     }
 
     private void sendVerificationCode(String phoneNo) {
@@ -117,9 +119,9 @@ public class VerifyOTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if(whatToDo.equals("updateData")){
+                            if (whatToDo.equals("updateData")) {
                                 updateUserData();
-                            }else{
+                            } else {
                                 storeNewUsersData();
                             }
                         } else {
@@ -133,7 +135,7 @@ public class VerifyOTP extends AppCompatActivity {
 
     private void updateUserData() {
         Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
-        intent.putExtra("username",username);
+        intent.putExtra("username", username);
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(scrollView, "transition_next");
@@ -152,9 +154,37 @@ public class VerifyOTP extends AppCompatActivity {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("Users");
 
-        UserHelperClass addNewUser = new UserHelperClass(fullName, username, passport, email, phoneNo, pwd, date, gender);
+        UserHelperClass addNewUser = new UserHelperClass(fullName, username, passport, email, phoneNo, pwd, date, gender, country);
 
         reference.child(username).setValue(addNewUser);
+
+        DatabaseReference reference_credit = rootNode.getReference("Credit");
+
+        CreditHelperClass addCredit;
+
+        if(country.equals("Sri Lanka")) {
+            addCredit = new CreditHelperClass(username, (float) 100);
+        }else {
+            addCredit = new CreditHelperClass(username, (float) 0);
+        }
+
+        reference_credit.child(username).setValue(addCredit);
+
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(scrollView, "transition_next");
+
+        Toast.makeText(this, "Account Created Successfully! Login to continue.", Toast.LENGTH_SHORT).show();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(VerifyOTP.this, pairs);
+            startActivity(intent, options.toBundle());
+            finish();
+        } else {
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void callNextScreenFromOTP(View view) {

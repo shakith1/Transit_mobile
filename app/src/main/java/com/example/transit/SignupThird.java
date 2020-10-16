@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.hbb20.CountryCodePicker;
@@ -37,6 +38,9 @@ public class SignupThird extends AppCompatActivity {
 
     public void callOTP(View view) {
 
+        if(!validatePhoneNo())
+            return;
+
         String fullName = getIntent().getStringExtra("fullName");
         String username = getIntent().getStringExtra("username");
         String passport = getIntent().getStringExtra("passport");
@@ -52,6 +56,8 @@ public class SignupThird extends AppCompatActivity {
             userEnteredPhoneNo = userEnteredPhoneNo.substring(1);
         }
 
+        String country = countryCodePicker.getSelectedCountryName();
+
         String _phoneNo = "+" + countryCodePicker.getFullNumber() + userEnteredPhoneNo;
 
         Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
@@ -65,6 +71,8 @@ public class SignupThird extends AppCompatActivity {
         intent.putExtra("gender", gender);
         intent.putExtra("date", date);
         intent.putExtra("phoneNo", _phoneNo);
+        intent.putExtra("country", country);
+        intent.putExtra("whatToDo", "createUser");
 
         // Add Transition
         Pair[] pairs = new Pair[1];
@@ -73,9 +81,20 @@ public class SignupThird extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignupThird.this, pairs);
             startActivity(intent, options.toBundle());
+            finish();
         } else {
             startActivity(intent);
+            finish();
         }
+    }
+
+    private boolean validatePhoneNo() {
+        if(phoneNo.getEditText().getText().toString().trim().isEmpty()){
+            Toast.makeText(this, "Phone No can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+            return true;
     }
 
     public void back(View view) {

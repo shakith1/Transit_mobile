@@ -2,13 +2,13 @@ package com.example.transit.Databases;
 
 public class UserHelperClass {
 
-    String fullName, username, passport, email, phoneNo, password, date, gender;
+    String fullName, username, passport, email, phoneNo, password, date, gender, country;
 
 
     public UserHelperClass() {
     }
 
-    public UserHelperClass(String fullName, String username, String passport, String email, String phoneNo, String password, String date, String gender) {
+    public UserHelperClass(String fullName, String username, String passport, String email, String phoneNo, String password, String date, String gender, String country) {
         this.fullName = fullName;
         this.username = username;
         this.passport = passport;
@@ -41,6 +41,14 @@ public class UserHelperClass {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPhoneNo() {

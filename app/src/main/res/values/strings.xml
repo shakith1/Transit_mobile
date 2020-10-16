@@ -60,6 +60,12 @@
     <string name="pwd_updated">Password Updated</string>
     <string name="pwd_update_success">Your Password has been updated!</string>
     <string name="id_passport">ID / Passport No</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="payment">Payment</string>
+    <string name="qr_code">QR Code</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test">Test</string>
 
 
 </resources>
