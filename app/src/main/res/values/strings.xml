@@ -56,8 +56,9 @@
     <string name="new_pwd">New Password</string>
     <string name="confirm_pwd">Confirm Password</string>
     <string name="ok">OK</string>
+    <string name="update">Update</string>
     <string name="pwd_updated">Password Updated</string>
-    <string name="pwd_update_success">Your Password has been update!</string>
+    <string name="pwd_update_success">Your Password has been updated!</string>
     <string name="id_passport">ID / Passport No</string>
 
 

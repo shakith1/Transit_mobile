@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.transit.Common.ForgetPassword;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
-    Button signup;
+    Button signup,forget_pwd;
     TextInputLayout username, pwd;
 
     RelativeLayout progressBar;
@@ -44,6 +45,7 @@ public class Login extends AppCompatActivity {
 
         username = findViewById(R.id.login_username);
         pwd = findViewById(R.id.login_pwd);
+        forget_pwd = findViewById(R.id.forget_pwd);
         progressBar = findViewById(R.id.progress_bar);
 
         if (!isConnected(this)) {
@@ -58,6 +60,20 @@ public class Login extends AppCompatActivity {
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(signup, "transition_signup");
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
+    }
+
+    public void callForgetPwd(View view){
+        Intent intent = new Intent(getApplicationContext(), ForgetPassword.class);
+
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(forget_pwd, "forget_pwd");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);

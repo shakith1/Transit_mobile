@@ -3,12 +3,19 @@ package com.example.transit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.example.transit.Common.SetNewPassword;
 import com.example.transit.Databases.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,13 +36,17 @@ public class VerifyOTP extends AppCompatActivity {
     PinView pinFromUser;
     String codeBySystem;
 
-    String fullName, username, passport, email, pwd, date, gender, phoneNo;
+    String fullName, username, passport, email, pwd, date, gender, phoneNo,whatToDo;
+
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_verify_o_t_p);
+
+        scrollView = findViewById(R.id.scrollview);
 
         pinFromUser = findViewById(R.id.pin_view);
 
@@ -48,6 +59,12 @@ public class VerifyOTP extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         gender = getIntent().getStringExtra("gender");
         phoneNo = getIntent().getStringExtra("phoneNo");
+        whatToDo = getIntent().getStringExtra("whatToDo");
+
+        if(whatToDo.equals("updateData")){
+            scrollView.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            pinFromUser.setItemBackgroundColor((getResources().getColor(R.color.colorWhite)));
+        }
 
         sendVerificationCode(phoneNo);
     }
@@ -100,7 +117,11 @@ public class VerifyOTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            storeNewUsersData();
+                            if(whatToDo.equals("updateData")){
+                                updateUserData();
+                            }else{
+                                storeNewUsersData();
+                            }
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(VerifyOTP.this, "Verification Not Completed! Try again.", Toast.LENGTH_SHORT).show();
@@ -108,6 +129,23 @@ public class VerifyOTP extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void updateUserData() {
+        Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
+        intent.putExtra("username",username);
+
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(scrollView, "transition_next");
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(VerifyOTP.this, pairs);
+            startActivity(intent, options.toBundle());
+            finish();
+        } else {
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void storeNewUsersData() {

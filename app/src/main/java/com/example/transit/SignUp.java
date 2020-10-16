@@ -103,33 +103,6 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private Boolean[] validateUserName() {
-
-        final Boolean[] check = new Boolean[1];
-        
-        String _username = username.getEditText().getText().toString().trim();
-        
-        Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").equalTo(_username);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
-                    check[0] = false;
-                }else{
-                    check[0] = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        
-        return check;
-    }
-
     // Validation Functions
 
     private boolean validateFullName() {
@@ -198,7 +171,7 @@ public class SignUp extends AppCompatActivity {
                 "$";
 
         if (value.isEmpty()) {
-            pwd.setError("Username cannot be empty");
+            pwd.setError("Password cannot be empty");
             return false;
         } else if (!value.matches(checkPwd)) {
             pwd.setError("Password should contain 4 characters.");
