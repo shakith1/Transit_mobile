@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_nav_dashboard"
+        android:title="@string/dashboard"
+        android:icon="@drawable/dashboard"
+        app:cnb_backgroundColor="@color/colorMainBackground"/>
+
+    <item
+        android:id="@+id/bottom_nav_card"
+        android:title="@string/payment"
+        android:icon="@drawable/credit_card"
+        app:cnb_backgroundColor="@color/colorMainBackground"/>
+
+    <item
+        android:id="@+id/bottom_nav_qrcode"
+        android:title="@string/qr_code"
+        android:icon="@drawable/qr_code"
+        app:cnb_backgroundColor="@color/colorMainBackground"/>
+</menu>
