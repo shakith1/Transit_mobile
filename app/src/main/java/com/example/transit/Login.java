@@ -16,12 +16,14 @@ import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.transit.Common.ForgetPassword;
 import com.example.transit.Databases.SessionManager;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +31,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class Login extends AppCompatActivity {
 
     Button signup,forget_pwd;
     TextInputLayout username, pwd;
-
+    TextInputEditText usernameEditText,pwdEditText;
     RelativeLayout progressBar;
+    CheckBox rememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +54,22 @@ public class Login extends AppCompatActivity {
         forget_pwd = findViewById(R.id.forget_pwd);
         progressBar = findViewById(R.id.progress_bar);
 
+        rememberMe = findViewById(R.id.remember_me);
+
+        usernameEditText = findViewById(R.id.login_username_edittext);
+        pwdEditText = findViewById(R.id.login_pwd_edittext);
+
         if (!isConnected(this)) {
             showCustomDialog();
             return;
+        }
+
+        // Check weather phone number and password is already in the session
+        SessionManager sessionManager = new SessionManager(Login.this,SessionManager.SESSION_REMEMBERME);
+        if(sessionManager.checkRememberMe()){
+            HashMap<String,String> rememberMeDetails = sessionManager.getRememberMeDetailFromSession();
+            usernameEditText.setText(rememberMeDetails.get(SessionManager.KEY_SESSIONUSERNAME));
+            pwdEditText.setText(rememberMeDetails.get(SessionManager.KEY_SESSIONPASSWORD));
         }
 
     }
@@ -97,6 +115,11 @@ public class Login extends AppCompatActivity {
         final String _username = username.getEditText().getText().toString().trim();
         final String _pwd = pwd.getEditText().getText().toString().trim();
 
+        if(rememberMe.isChecked()){
+            SessionManager sessionManager = new SessionManager(Login.this,SessionManager.SESSION_REMEMBERME);
+            sessionManager.createRememberMeSession(_username,_pwd);
+        }
+
         // Database
         Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username").equalTo(_username);
 
@@ -121,7 +144,7 @@ public class Login extends AppCompatActivity {
                         String _password = dataSnapshot.child(_username).child("password").getValue(String.class);
 
                         // Create Session
-                        SessionManager sessionManager = new SessionManager(Login.this);
+                        SessionManager sessionManager = new SessionManager(Login.this,SessionManager.SESSION_USERSESSION);
                         sessionManager.createLoginSession(_fullName,_username,_email,_passport,_phoneNo,_password,_date,_gender);
 
                         progressBar.setVisibility(View.GONE);

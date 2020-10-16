@@ -51,6 +51,7 @@
                 app:endIconTint="@color/colorBlack">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_username_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli"
@@ -75,6 +76,7 @@
                 app:endIconTint="@color/colorBlack">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_pwd_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli"
@@ -91,6 +93,7 @@
                 android:layout_marginTop="20dp">
                 
                 <CheckBox
+                    android:id="@+id/remember_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"

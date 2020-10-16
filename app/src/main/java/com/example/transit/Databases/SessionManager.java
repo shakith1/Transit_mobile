@@ -12,6 +12,11 @@ public class SessionManager {
     SharedPreferences.Editor editor;
     Context context;
 
+    // Session Names
+    public static final String SESSION_USERSESSION = "userLoginSession";
+    public static final String SESSION_REMEMBERME = "rememberMe";
+
+    // User session Variables
     private static final String IS_LOGIN = "isLoggedIn";
 
     public static final String KEY_FULLNAME = "fullName";
@@ -23,12 +28,20 @@ public class SessionManager {
     public static final String KEY_DATE = "date";
     public static final String KEY_GENDER = "gender";
 
-    public SessionManager(Context _context) {
+    // Remember Me variables
+
+    private static final String IS_REMEBERME = "isRememberMe";
+    public static final String KEY_SESSIONUSERNAME = "username";
+    public static final String KEY_SESSIONPASSWORD = "password";
+
+    // Constructor
+    public SessionManager(Context _context, String sessionName) {
         context = _context;
-        userSession = context.getSharedPreferences("userLoginSession", Context.MODE_PRIVATE);
+        userSession = context.getSharedPreferences(sessionName, Context.MODE_PRIVATE);
         editor = userSession.edit();
     }
 
+    // Users Login Session
     public void createLoginSession(String fullName, String username, String email, String passport, String phoneNo, String password, String date, String gender) {
 
         editor.putBoolean(IS_LOGIN, true);
@@ -70,5 +83,33 @@ public class SessionManager {
     public void logoutUserFromSession() {
         editor.clear();
         editor.commit();
+    }
+
+    // Remember me Session Functions
+
+    public void createRememberMeSession(String username,String password) {
+
+        editor.putBoolean(IS_REMEBERME, true);
+
+        editor.putString(KEY_SESSIONUSERNAME, username);
+        editor.putString(KEY_SESSIONPASSWORD, password);
+
+        editor.commit();
+    }
+
+    public HashMap<String, String> getRememberMeDetailFromSession () {
+        HashMap<String, String> userData = new HashMap<String, String>();
+
+        userData.put(KEY_SESSIONUSERNAME, userSession.getString(KEY_SESSIONUSERNAME, null));
+        userData.put(KEY_SESSIONPASSWORD, userSession.getString(KEY_SESSIONPASSWORD, null));
+
+        return userData;
+    }
+
+    public boolean checkRememberMe() {
+        if (userSession.getBoolean(IS_REMEBERME, false)) {
+            return true;
+        } else
+            return false;
     }
 }
