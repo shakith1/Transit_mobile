@@ -149,6 +149,7 @@ public class Login extends AppCompatActivity {
 
                         progressBar.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                        finish();
                     } else {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.this, "Password does not match!", Toast.LENGTH_SHORT).show();

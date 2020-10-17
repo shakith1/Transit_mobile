@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.transit.Databases.SessionManager;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import java.util.HashMap;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -19,18 +22,12 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         chipNavigationBar = findViewById(R.id.bottom_nav_menu);
-        chipNavigationBar.setItemSelected(R.id.bottom_nav_dashboard,true);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new UserDashboard()).commit();
+        chipNavigationBar.setItemSelected(R.id.bottom_nav_dashboard, true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserDashboard()).commit();
         bottomMenu();
 
-////        TextView textView = findViewById(R.id.textView);
-//
-//        SessionManager sessionManager = new SessionManager(this,SessionManager.SESSION_USERSESSION);
-//        HashMap<String,String> userDetails =  sessionManager.getUserDetailFromSession();
-//
-//        String fullName = userDetails.get(SessionManager.KEY_FULLNAME);
-//
-////        textView.setText(fullName);
+        String fullName = getFullName();
+        String userName = getUserName();
 
 
     }
@@ -40,7 +37,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onItemSelected(int i) {
                 Fragment fragment = null;
-                switch (i){
+                switch (i) {
                     case R.id.bottom_nav_dashboard:
                         fragment = new UserDashboard();
                         break;
@@ -51,8 +48,28 @@ public class Dashboard extends AppCompatActivity {
                         fragment = new UserQR();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             }
         });
+    }
+
+    public String getUserName() {
+
+        SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USERSESSION);
+        HashMap<String, String> userDetails = sessionManager.getUserDetailFromSession();
+
+        String userName = userDetails.get(SessionManager.KEY_USERNAME);
+
+        return userName;
+    }
+
+    public String getFullName() {
+
+        SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USERSESSION);
+        HashMap<String, String> userDetails = sessionManager.getUserDetailFromSession();
+
+        String fullName = userDetails.get(SessionManager.KEY_FULLNAME);
+
+        return fullName;
     }
 }
