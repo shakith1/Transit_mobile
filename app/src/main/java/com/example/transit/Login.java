@@ -142,10 +142,11 @@ public class Login extends AppCompatActivity {
                         String _gender = dataSnapshot.child(_username).child("gender").getValue(String.class);
                         String _phoneNo = dataSnapshot.child(_username).child("phoneNo").getValue(String.class);
                         String _password = dataSnapshot.child(_username).child("password").getValue(String.class);
+                        String _country = dataSnapshot.child(_username).child("country").getValue(String.class);
 
                         // Create Session
                         SessionManager sessionManager = new SessionManager(Login.this,SessionManager.SESSION_USERSESSION);
-                        sessionManager.createLoginSession(_fullName,_username,_email,_passport,_phoneNo,_password,_date,_gender);
+                        sessionManager.createLoginSession(_fullName,_username,_email,_passport,_phoneNo,_password,_date,_gender,_country);
 
                         progressBar.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(),Dashboard.class));

@@ -85,4 +85,14 @@ public class Dashboard extends AppCompatActivity {
 
         return phoneNo;
     }
+
+    public String getCountry() {
+
+        SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USERSESSION);
+        HashMap<String, String> userDetails = sessionManager.getUserDetailFromSession();
+
+        String country = userDetails.get(SessionManager.KEY_COUNTRY);
+
+        return country;
+    }
 }

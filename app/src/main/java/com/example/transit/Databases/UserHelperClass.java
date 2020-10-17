@@ -17,6 +17,7 @@ public class UserHelperClass {
         this.password = password;
         this.date = date;
         this.gender = gender;
+        this.country = country;
     }
 
     public String getFullName() {

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class UserDashboard extends Fragment {
 
-    TextView fullName,username;
+    TextView fullName,username,country;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +29,19 @@ public class UserDashboard extends Fragment {
 
         fullName = view.findViewById(R.id.fullName);
         username = view.findViewById(R.id.userName);
+        country = view.findViewById(R.id.local_foreign);
+
+        String _country = ((Dashboard) getActivity()).getCountry();
+        System.out.println(_country);
 
         fullName.setText(((Dashboard) getActivity()).getFullName());
         username.setText(((Dashboard) getActivity()).getUserName());
+
+        if(_country.equals("Sri Lanka")){
+            country.setText("Local");
+        }else{
+            country.setText("Foreign");
+        }
+
     }
 }
