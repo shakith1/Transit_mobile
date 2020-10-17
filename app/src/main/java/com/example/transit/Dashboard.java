@@ -40,12 +40,15 @@ public class Dashboard extends AppCompatActivity {
                 switch (i) {
                     case R.id.bottom_nav_dashboard:
                         fragment = new UserDashboard();
+                        chipNavigationBar.setItemSelected(R.id.bottom_nav_dashboard, true);
                         break;
                     case R.id.bottom_nav_card:
                         fragment = new UserPayment();
+                        chipNavigationBar.setItemSelected(R.id.bottom_nav_card, true);
                         break;
                     case R.id.bottom_nav_qrcode:
                         fragment = new UserQR();
+                        chipNavigationBar.setItemSelected(R.id.bottom_nav_qrcode, true);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
@@ -71,5 +74,15 @@ public class Dashboard extends AppCompatActivity {
         String fullName = userDetails.get(SessionManager.KEY_FULLNAME);
 
         return fullName;
+    }
+
+    public String getphoneNo() {
+
+        SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USERSESSION);
+        HashMap<String, String> userDetails = sessionManager.getUserDetailFromSession();
+
+        String phoneNo = userDetails.get(SessionManager.KEY_PHONENO);
+
+        return phoneNo;
     }
 }
