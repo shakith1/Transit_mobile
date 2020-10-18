@@ -15,7 +15,7 @@ import com.example.transit.R;
 
 public class UserPayment extends Fragment {
 
-    Button googlePay;
+    Button googlePay,cardPayment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,11 +29,20 @@ public class UserPayment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         googlePay = view.findViewById(R.id.btn_gpay);
+        cardPayment = view.findViewById(R.id.btn_card_payment);
 
         googlePay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new pay_google();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            }
+        });
+
+        cardPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new CardPayment();
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             }
         });

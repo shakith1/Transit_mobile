@@ -81,6 +81,15 @@
     <string name="your_journey">Your Journey</string>
     <string name="price">Price :</string>
     <string name="date">Date :</string>
+    <string name="addCard">Add Card</string>
+    <string name="addCard_details">Add Card Details</string>
+    <string name="card_no">Card Number</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="expire_date">Expire Date</string>
+    <string name="cvc">CVC</string>
+    <string name="save">SAVE</string>
+    <string name="card_number"> Card No : </string>
+    <string name="card_holder_name">Card Holder\'s Name</string>
 
 
 </resources>

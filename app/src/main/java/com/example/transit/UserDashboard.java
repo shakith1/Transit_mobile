@@ -91,7 +91,9 @@ public class UserDashboard extends Fragment {
                         addJourneyCard(journey,price,date);
                     }
                     progressBar.setVisibility(View.GONE);
-                }else {}
+                }else {
+                    progressBar.setVisibility(View.GONE);
+                }
             }
 
             @Override
