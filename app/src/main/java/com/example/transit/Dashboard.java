@@ -95,4 +95,8 @@ public class Dashboard extends AppCompatActivity {
 
         return country;
     }
+
+    public void setChipNavigation(){
+        chipNavigationBar.setItemSelected(R.id.bottom_nav_dashboard, true);
+    }
 }
