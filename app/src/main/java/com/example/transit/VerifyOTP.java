@@ -66,6 +66,7 @@ public class VerifyOTP extends AppCompatActivity {
         if (whatToDo.equals("updateData")) {
             scrollView.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             pinFromUser.setItemBackgroundColor((getResources().getColor(R.color.colorWhite)));
+            sendVerificationCode(phoneNo);
         }else{
             sendVerificationCode(phoneNo);
         }
