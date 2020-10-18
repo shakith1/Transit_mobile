@@ -62,27 +62,27 @@ public class MainActivity extends AppCompatActivity {
                     onBoardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
                     boolean isFirstTime = onBoardingScreen.getBoolean("firstTime", true);
 
-//                if(isFirstTime){
+                    if (isFirstTime) {
 
-                    SharedPreferences.Editor editor = onBoardingScreen.edit();
-                    editor.putBoolean("firstTime", false);
-                    editor.commit();
+                        SharedPreferences.Editor editor = onBoardingScreen.edit();
+                        editor.putBoolean("firstTime", false);
+                        editor.commit();
 
-                    Intent intent = new Intent(MainActivity.this, OnBoarding.class);
-                    startActivity(intent);
-                    finish();
+                        Intent intent = new Intent(MainActivity.this, OnBoarding.class);
+                        startActivity(intent);
+                        finish();
 
-//                } else {
-//                    Intent intent = new Intent(MainActivity.this, Login.class);
-//
-//                    Pair[] pairs = new Pair[2];
-//                    pairs[0] = new Pair<View,String>(image,"logo");
-//                    pairs[1] = new Pair<View,String>(logo,"logo_text");
-//
-//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-//                    startActivity(intent,options.toBundle());
-//                    finish();
-//                }
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+
+                        Pair[] pairs = new Pair[2];
+                        pairs[0] = new Pair<View, String>(image, "logo");
+                        pairs[1] = new Pair<View, String>(logo, "logo_text");
+
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                        startActivity(intent, options.toBundle());
+                        finish();
+                    }
                 }
             }, SPLASH_SCREEN);
         }
