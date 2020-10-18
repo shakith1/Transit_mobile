@@ -8,5 +8,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorLetsBtn">#E69640</color>
     <color name="colorLightWhite">#F8F8F7</color>
+    <color name="colorLightDark">#FAFAFA</color>
 </resources>
 
