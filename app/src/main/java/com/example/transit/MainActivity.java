@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.transit.Common.OnBoarding;
+import com.example.transit.Databases.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,31 +34,38 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
 
-        topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
-        bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        SessionManager sessionManager = new SessionManager(MainActivity.this, SessionManager.SESSION_USERSESSION);
+        if (sessionManager.checkLogin()) {
+            Intent intent = new Intent(MainActivity.this, Dashboard.class);
+            startActivity(intent);
+            finish();
+        } else {
+            setContentView(R.layout.activity_main);
 
-        image = findViewById(R.id.imageView);
-        logo = findViewById(R.id.textView4);
-        tag = findViewById(R.id.textView5);
+            topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+            bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-        image.setAnimation(topAnimation);
-        logo.setAnimation(bottomAnimation);
-        tag.setAnimation(bottomAnimation);
+            image = findViewById(R.id.imageView);
+            logo = findViewById(R.id.textView4);
+            tag = findViewById(R.id.textView5);
 
-        new Handler().postDelayed(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void run() {
+            image.setAnimation(topAnimation);
+            logo.setAnimation(bottomAnimation);
+            tag.setAnimation(bottomAnimation);
 
-                onBoardingScreen = getSharedPreferences("onBoardingScreen",MODE_PRIVATE);
-                boolean isFirstTime = onBoardingScreen.getBoolean("firstTime",true);
+            new Handler().postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void run() {
+
+                    onBoardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+                    boolean isFirstTime = onBoardingScreen.getBoolean("firstTime", true);
 
 //                if(isFirstTime){
 
                     SharedPreferences.Editor editor = onBoardingScreen.edit();
-                    editor.putBoolean("firstTime",false);
+                    editor.putBoolean("firstTime", false);
                     editor.commit();
 
                     Intent intent = new Intent(MainActivity.this, OnBoarding.class);
@@ -75,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivity(intent,options.toBundle());
 //                    finish();
 //                }
-            }
-        }, SPLASH_SCREEN);
+                }
+            }, SPLASH_SCREEN);
+        }
     }
 }
