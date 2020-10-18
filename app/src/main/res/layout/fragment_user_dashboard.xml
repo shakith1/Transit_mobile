@@ -16,6 +16,13 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/logout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icons8_export_48"
+            android:layout_alignParentRight="true"/>
+        
+        <ImageView
             android:id="@+id/avatar"
             android:layout_width="120dp"
             android:layout_height="120dp"

@@ -1,5 +1,8 @@
 package com.example.transit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +13,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.transit.Databases.SessionManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +31,7 @@ public class UserDashboard extends Fragment {
     TextView fullName,username,country,balance;
     RelativeLayout progressBar;
     LinearLayout journey;
+    ImageView logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +49,7 @@ public class UserDashboard extends Fragment {
         country = view.findViewById(R.id.local_foreign);
         balance = view.findViewById(R.id.balance_dashboard);
         progressBar = view.findViewById(R.id.progress_bar);
+        logout = view.findViewById(R.id.logout);
 
         journey = view.findViewById(R.id.journey_list);
 
@@ -100,6 +107,36 @@ public class UserDashboard extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                builder.setCancelable(true);
+                builder.setTitle("Logout");
+                builder.setMessage("Are you sure to Logout?");
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SessionManager sessionManager = new SessionManager(getContext(), SessionManager.SESSION_USERSESSION);
+                        sessionManager.logoutUserFromSession();
+                        Intent intent = new Intent(getContext(), Login.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+                builder.show();
             }
         });
     }
