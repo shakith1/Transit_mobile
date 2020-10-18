@@ -92,6 +92,7 @@ public class UserDashboard extends Fragment {
                     }
                     progressBar.setVisibility(View.GONE);
                 }else {
+                    addDefaultJourney();
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -101,6 +102,12 @@ public class UserDashboard extends Fragment {
 
             }
         });
+    }
+
+    private void addDefaultJourney() {
+        View journeyView = getLayoutInflater().inflate(R.layout.default_journey,null,false);
+        journeyView.findViewById(R.id.defalut_journey);
+        journey.addView(journeyView);
     }
 
     private void addJourneyCard(String _journey,Long _price,String _date){
