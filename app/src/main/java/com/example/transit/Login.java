@@ -183,7 +183,7 @@ public class Login extends AppCompatActivity {
             return false;
     }
 
-    private void showCustomDialog() {
+    public void showCustomDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
         builder.setMessage("Please connect to the internet to proceed further")
                 .setCancelable(false)

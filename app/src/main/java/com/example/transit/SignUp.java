@@ -25,13 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
 
-    ImageView back,image;
-    TextView title,title_text;
+    ImageView back, image;
+    TextView title, title_text;
     Button next, login;
 
     RelativeLayout progressBar;
 
-    TextInputLayout fullName, username,passport, email, pwd;
+    TextInputLayout fullName, username, passport, email, pwd;
+
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,9 @@ public class SignUp extends AppCompatActivity {
 
     public void callNextSignupScreen(View view) {
 
-        if(!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword() ){
+        user = username.getEditText().getText().toString().trim();
+
+        if (!validateFullName() | !validateUsername(user) | !validateEmail() | !validatePassword()) {
             return;
         }
 
@@ -71,15 +75,15 @@ public class SignUp extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     progressBar.setVisibility(View.GONE);
                     Intent intent = new Intent(getApplicationContext(), SignUpSecond.class);
 
-                    intent.putExtra("fullName",fullName.getEditText().getText().toString());
-                    intent.putExtra("userName",username.getEditText().getText().toString());
-                    intent.putExtra("passport",passport.getEditText().getText().toString());
-                    intent.putExtra("email",email.getEditText().getText().toString());
-                    intent.putExtra("pwd",pwd.getEditText().getText().toString());
+                    intent.putExtra("fullName", fullName.getEditText().getText().toString());
+                    intent.putExtra("userName", username.getEditText().getText().toString());
+                    intent.putExtra("passport", passport.getEditText().getText().toString());
+                    intent.putExtra("email", email.getEditText().getText().toString());
+                    intent.putExtra("pwd", pwd.getEditText().getText().toString());
 
                     Pair[] pairs = new Pair[3];
                     pairs[0] = new Pair<View, String>(title, "transition_title");
@@ -120,8 +124,8 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private boolean validateUsername() {
-        String value = username.getEditText().getText().toString().trim();
+    public boolean validateUsername(String value) {
+
         String checkSpaces = "\\A\\w{4,20}\\z";
 
         if (value.isEmpty()) {
@@ -162,7 +166,7 @@ public class SignUp extends AppCompatActivity {
 
     private boolean validatePassword() {
         String value = pwd.getEditText().getText().toString().trim();
-        String checkPwd =  "^" +
+        String checkPwd = "^" +
                 //"(?=.*[0-9])" +         //at least 1 digit
                 //"(?=.*[a-z])" +         //at least 1 lower case letter
                 //"(?=.*[A-Z])" +         //at least 1 upper case letter

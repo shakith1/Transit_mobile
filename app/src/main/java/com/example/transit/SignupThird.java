@@ -21,6 +21,7 @@ public class SignupThird extends AppCompatActivity {
     Button next, login;
     CountryCodePicker countryCodePicker;
     TextInputLayout phoneNo;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,9 @@ public class SignupThird extends AppCompatActivity {
 
     public void callOTP(View view) {
 
-        if(!validatePhoneNo())
+        phone = phoneNo.getEditText().getText().toString().trim();
+
+        if(!validatePhoneNo(phone))
             return;
 
         String fullName = getIntent().getStringExtra("fullName");
@@ -88,8 +91,8 @@ public class SignupThird extends AppCompatActivity {
         }
     }
 
-    private boolean validatePhoneNo() {
-        if(phoneNo.getEditText().getText().toString().trim().isEmpty()){
+    public boolean validatePhoneNo(String phone) {
+        if(phone.isEmpty()){
             Toast.makeText(this, "Phone No can not be empty!", Toast.LENGTH_SHORT).show();
             return false;
         }
