@@ -4,7 +4,6 @@ public class UserHelperClass {
 
     String fullName, username, passport, email, phoneNo, password, date, gender, country;
 
-
     public UserHelperClass() {
     }
 

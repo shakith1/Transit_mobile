@@ -93,7 +93,7 @@ public class SignupThird extends AppCompatActivity {
 
     public boolean validatePhoneNo(String phone) {
         if(phone.isEmpty()){
-            Toast.makeText(this, "Phone No can not be empty!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Phone No can not be empty!", Toast.LENGTH_SHORT).show();
             return false;
         }
         else
