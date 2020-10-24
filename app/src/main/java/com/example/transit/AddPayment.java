@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.transit.HelperClasses.FirebaseHelper;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +41,8 @@ public class AddPayment extends Fragment {
 
     Float _balance;
     List<String> cardList = new ArrayList<>();
+
+    private DatabaseReference firebaseHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,9 +122,12 @@ public class AddPayment extends Fragment {
 
                     Float new_amount = _balance + _amount_converted;
 
-                    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-                    DatabaseReference reference_credit = rootNode.getReference("Credit");
-                    reference_credit.child(username).child("credit").setValue(new_amount);
+                    /**
+                     * Added Singeleton Pattern
+                     */
+
+                    firebaseHelper = FirebaseHelper.getInstance();
+                    firebaseHelper.child(username).child("credit").setValue(new_amount);
 
                     Fragment fragment = new UserDashboard();
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
